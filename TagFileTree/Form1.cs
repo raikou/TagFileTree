@@ -15,6 +15,19 @@ namespace TagFileTree
 		public Form1()
 		{
 			InitializeComponent();
+			CustomToolsColor CTool = new CustomToolsColor();
+			ToolStripManager.Renderer =	new ToolStripProfessionalRenderer( CTool );
+			this.BackColor = CTool.getBackGroundColor();
+		}
+
+		private void toolStripDropDownButton1_Click(object sender, EventArgs e)
+		{
+			
+		}
+
+		private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+		{
+
 		}
 	}
 }
