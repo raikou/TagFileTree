@@ -1,29 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-
-using System.Drawing.Drawing2D;
 using System.Globalization;
 
 namespace TagFileTree
 {
 	public partial class Form1 : Form
 	{
-		const int titleWidth = 300;
-		private DataStructs fileDataStructs;
+		const int TitleWidth = 300;
+		private DataStructs _fileDataStructs;
 		
 		public Form1()
 		{
 			InitializeComponent();
-			CustomToolsColor CTool = new CustomToolsColor();
-			ToolStripManager.Renderer =	new ToolStripProfessionalRenderer( CTool );
-			this.BackColor = CTool.getBackGroundColor();
+			CustomToolsColor cTool = new CustomToolsColor();
+			ToolStripManager.Renderer =	new ToolStripProfessionalRenderer( cTool );
+			this.BackColor = cTool.getBackGroundColor();
 
 		}
 
@@ -50,11 +42,11 @@ namespace TagFileTree
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
-			fileDataStructs = new DataStructs(@"E:\MyData\ProgramingTempPlace\TagFileTree\TEST");
+			_fileDataStructs = new DataStructs(@"E:\MyData\ProgramingTempPlace\TagFileTree\TEST");
 
-			for (int i = 0; i < fileDataStructs.dataStructs.Count; i++)
+			for (int i = 0; i < _fileDataStructs.dataStructs.Count; i++)
 			{
-				string[] itemData = { fileDataStructs.dataStructs[i].FileName, fileDataStructs.dataStructs[i].addDate.ToString(), "【テスト】【キノセイ】【刻】" };
+				string[] itemData = { _fileDataStructs.dataStructs[i].FileName, _fileDataStructs.dataStructs[i].addDate.ToString(), "【テスト】【キノセイ】【刻】" };
 				listView1.Items.Add(new ListViewItem(itemData));
 				if (i % 2 == 0) listView1.Items[i].BackColor = Color.LightSkyBlue;
 				//listView2.Items.Add(new ListViewItem(itemData));
@@ -66,17 +58,7 @@ namespace TagFileTree
 		}
 
 
-		private void toolStripDropDownButton1_Click(object sender, EventArgs e)
-		{
-			
-		}
-
 		private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-		{
-
-		}
-
-		private void splitter1_SplitterMoved(object sender, SplitterEventArgs e)
 		{
 
 		}
@@ -94,6 +76,8 @@ namespace TagFileTree
 		private void DrowColorText(string changeText, DrawListViewItemEventArgs e, Color fontColor, Brush BackGroundColor)
 		{
 			//TODO:位置の調整をする
+			//TODO:タブの移動での移動を実装する
+			//TODO:タブの移動での移動を実装する
 
 			//グリッドをOFFにするとなんか、以下が表示されなくなるので、グリッドオフでの表示に対応する。
 			
@@ -174,7 +158,7 @@ namespace TagFileTree
 			ListViewItem lvs = listView1.Items[e.ItemIndex];
 			for (int i = 1; i < lvs.SubItems.Count; i++)
 			{
-				rec.X = titleWidth + lvs.Position.X;
+				rec.X = TitleWidth + lvs.Position.X;
 				rec.Y = lvs.Position.Y;
 				string text = lvs.SubItems[i].Text;
 				rec.Width = TextRenderer.MeasureText(g, text, listView1.Font, new Size(int.MaxValue, int.MinValue), TextFormatFlags.NoPadding).Width;
